@@ -9,6 +9,7 @@
 
 # general info
 model_name=$1
+#echo $model_name
 task=qr_coref
 batch_size=15
 lr=5e-05 # learning rate
@@ -35,7 +36,7 @@ use_binary_cls=true
 
 checkpoint='checkpoint/'$model_name
 log='log/'$model_name'.log'
-mkdir -p temp/
+mkdir -p temp/ #TODO 查看下-p参数的意思
 python main.py  --mode="training" --seed=$seed --task=$task \
 				--model_name=$model_name --checkpoint=$checkpoint \
 				--train_file=$train_file --dev_file=$dev_file --test_file=$test_file \
@@ -43,4 +44,4 @@ python main.py  --mode="training" --seed=$seed --task=$task \
 				--train_batch_size=$batch_size --learning_rate=$lr \
 				--coref_layer_idx=$coref_layer_idx --n_coref_head=$n_coref_head \
 				--use_coref_attn=$use_coref_attn --coref_attn_layer=$coref_attn_layer \
-				--use_binary_cls=$use_binary_cls > $log
+				--use_binary_cls=$use_binary_cls #> $log $> $log会讲所有的输出都重定向到log里，不会输出。我这里暂时注释

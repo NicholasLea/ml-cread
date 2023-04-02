@@ -58,7 +58,7 @@ python3.6 and the packages in `requirements.txt`, install them by running
 Enter the `modeling` folder and follow the instruction below.
 
 ```console
->>> cd modeling
+cd modeling
 ```
 
 ## Data Pre-processing
@@ -67,7 +67,7 @@ First run the following command to prepare the data for training.
 The processed data will be stored in the `proc_data/` directory.
 
 ```console
->>> python utils/process_data.py
+python utils/process_data.py
 ```
 
 
@@ -75,7 +75,7 @@ The processed data will be stored in the `proc_data/` directory.
 Run `train.sh` to train the model, which calls `main.py` with default hyper-parameters.
 
 ```console
->>> bash train.sh [job_name]
+bash train.sh first
 ```
 
 The model checkpoint will be stored at `checkpoint/$job_name`, and training log file is at `log/$job_name.log`
@@ -87,7 +87,7 @@ A reference training log (`log/trained-cread.log`) is provided.
 Run `decode.sh` to decode using a trained model. `job_name` is the same as specified in training.
 
 ```console
->>> bash decode.sh [job_name]
+bash decode.sh [job_name]
 ```
 
 Evaluation result, with both generated rewritten utterances and model performance, is recorded in `deocde/$job_name.json`.

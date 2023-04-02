@@ -49,8 +49,12 @@ class JointModel(GPT2PreTrainedModel):
 
 	def load_pretrained_weight(self):
 		print('Load pretrained GPT')
+        # GPT2LMHeadModel是一个Hugging Face 的 Transformers 提供的 API，可用于 GPT-2 模型进行文本生成任务的预训练和微调阶段
+        # https://zhuanlan.zhihu.com/p/452665587
 		pretrained_gpt = GPT2LMHeadModel.from_pretrained('gpt2', config=self.config)
+        # self.transformer是一个GPT2Model
 		self.transformer.load_state_dict(pretrained_gpt.transformer.state_dict())
+        # lm_head是一个线性层
 		self.lm_head.load_state_dict(pretrained_gpt.lm_head.state_dict())
 
 
@@ -315,14 +319,14 @@ class JointModel(GPT2PreTrainedModel):
 		return ctx_vec
 
 
-	def forward(self, input_ids=None, past=None, attention_mask=None, token_type_ids=None, position_ids=None,
+	def forward(self, input_ids=None, attention_mask=None, token_type_ids=None, position_ids=None,
 				head_mask=None, inputs_embeds=None, labels=None, use_cache=None, output_attentions=None,
 				output_hidden_states=None, step=None, mention_labels=None, predict_mention=True, predict_lm=True,
 				coref_attn=None, batch=None, coref_links=None):
 
 		# run gpt2
 		# last hidden state, (presents), (all hidden_states), (attentions)
-		transformer_outputs = self.transformer(input_ids, past=past, attention_mask=attention_mask,
+		transformer_outputs = self.transformer(input_ids, attention_mask=attention_mask,
 												token_type_ids=token_type_ids, position_ids=position_ids,
 												head_mask=head_mask, inputs_embeds=inputs_embeds, use_cache=use_cache,
 												output_attentions=True, output_hidden_states=True)

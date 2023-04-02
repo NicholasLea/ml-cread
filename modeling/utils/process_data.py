@@ -19,6 +19,8 @@ from coref_utils import (
 	build_cluster_from_links
 )
 
+import nltk
+nltk.download('punkt')
 
 def filter_links(original_links, turn, ctx, utt):
 	'''
